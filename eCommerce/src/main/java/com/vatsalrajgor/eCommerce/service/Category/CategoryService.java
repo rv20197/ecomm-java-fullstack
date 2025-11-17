@@ -1,7 +1,9 @@
 package com.vatsalrajgor.eCommerce.service.Category;
 
 import com.vatsalrajgor.eCommerce.model.Category;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +30,7 @@ public class CategoryService implements CategoryServiceInterface{
         Category category = categories.stream()
                 .filter(c->c.getCategoryId().equals(categoryId))
                 .findFirst()
-                .orElse(null);
-        if (category == null){
-            return "Category Not Found!";
-        }
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Category with id: %s not found", categoryId)));
         categories.remove(category);
         return "Category deleted successfully!";
     }
