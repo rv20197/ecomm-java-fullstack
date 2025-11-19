@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Service
 public class CategoryService implements CategoryServiceInterface{
-    private List<Category> categories = new ArrayList<>();
+    private final List<Category> categories = new ArrayList<>();
     private Long nextId = 1L;
 
     @Override
