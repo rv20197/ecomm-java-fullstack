@@ -42,8 +42,6 @@ public class CategoryService implements CategoryServiceInterface{
                 .filter(c->c.getCategoryId().equals(categoryId))
                 .findFirst()
                 .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Category with id: %s not found", categoryId)));
-
-
         existingCategory.setCategoryName(category.getCategoryName());
         return existingCategory;
 
