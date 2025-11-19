@@ -12,27 +12,36 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/api")
 public class CategoryController {
 
     private final CategoryService categoryService;
 
-    @GetMapping("/api/public/categories")
+    @GetMapping("/public/categories")
     public ResponseEntity<List<Category>> getAllCategories(){
         return new ResponseEntity<>(categoryService.getAllCategories(), HttpStatus.OK);
     }
 
-    @PostMapping("/api/public/categories")
+    @PostMapping("/public/categories")
     public ResponseEntity<Category> createCategory(@RequestBody Category category){
         return new ResponseEntity<>(categoryService.createCategory(category), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/api/admin/categories/{categoryId}")
+    @DeleteMapping("/admin/categories/{categoryId}")
     public ResponseEntity<String> deleteCategory(@PathVariable Long categoryId){
         try{
             return new ResponseEntity<>(categoryService.deleteCategory(categoryId), HttpStatus.OK);
         }catch(ResponseStatusException e){
             return new ResponseEntity<>(e.getReason(), e.getStatusCode());
         }
+    }
 
+    @PutMapping("/public/categories/{categoryId}")
+    public ResponseEntity<?> updateCategory(@RequestBody Category category, @PathVariable Long categoryId){
+        try {
+            return new ResponseEntity<>(categoryService.updateCategory(category, categoryId), HttpStatus.OK);
+        }catch(ResponseStatusException e){
+            return new ResponseEntity<>(e.getReason(),e.getStatusCode());
+        }
     }
 }
