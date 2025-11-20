@@ -31,7 +31,7 @@ public class CategoryService implements CategoryServiceInterface{
     @Override
     public String deleteCategory(Long categoryId) {
         Category category = categoryRepo.findById(categoryId).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Category with id: %s not found", categoryId)));
-        categoryRepo.delete(category);
+        categoryRepo.deleteById(category.getCategoryId());
         return "Category deleted successfully!";
     }
 
