@@ -12,8 +12,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Entity
 @Data
-@Getter
-@Setter
 public class Category{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
