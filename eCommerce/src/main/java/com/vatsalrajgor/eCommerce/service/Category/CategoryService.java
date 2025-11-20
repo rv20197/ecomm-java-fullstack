@@ -41,6 +41,5 @@ public class CategoryService implements CategoryServiceInterface{
         existingCategory.setCategoryId(categoryId);
         existingCategory.setCategoryName(category.getCategoryName());
         return categoryRepo.save(existingCategory);
-
     }
 }
