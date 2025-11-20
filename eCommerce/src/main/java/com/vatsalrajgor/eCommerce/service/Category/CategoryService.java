@@ -7,12 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class CategoryService implements CategoryServiceInterface{
-    private Long nextId = 1L;
     private final CategoryRepo categoryRepo;
 
     @Autowired
