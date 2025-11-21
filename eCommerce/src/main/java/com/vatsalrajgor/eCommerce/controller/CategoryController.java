@@ -2,9 +2,11 @@ package com.vatsalrajgor.eCommerce.controller;
 
 import com.vatsalrajgor.eCommerce.model.Category;
 import com.vatsalrajgor.eCommerce.service.Category.CategoryService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -23,7 +25,7 @@ public class CategoryController {
     }
 
     @PostMapping("/public/categories")
-    public ResponseEntity<Category> createCategory(@RequestBody Category category){
+    public ResponseEntity<?> createCategory(@Valid @RequestBody Category category){
         return new ResponseEntity<>(categoryService.createCategory(category), HttpStatus.CREATED);
     }
 
