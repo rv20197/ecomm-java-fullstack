@@ -1,5 +1,6 @@
 package com.vatsalrajgor.eCommerce.service.Category;
 
+import com.vatsalrajgor.eCommerce.exceptions.ResourceNotFoundException;
 import com.vatsalrajgor.eCommerce.model.Category;
 import com.vatsalrajgor.eCommerce.repository.CategoryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +31,14 @@ public class CategoryService implements CategoryServiceInterface{
 
     @Override
     public String deleteCategory(Long categoryId) {
-        Category category = categoryRepo.findById(categoryId).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Category with id: %s not found", categoryId)));
+        Category category = categoryRepo.findById(categoryId).orElseThrow(()-> new ResourceNotFoundException("Category","id",categoryId));
         categoryRepo.deleteById(category.getCategoryId());
         return "Category deleted successfully!";
     }
 
     @Override
     public Category updateCategory(Category category,  Long categoryId) {
-        Category existingCategory = categoryRepo.findById(categoryId).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Category with id: %s not found", categoryId)));
+        Category existingCategory = categoryRepo.findById(categoryId).orElseThrow(()-> new ResourceNotFoundException("Category","id",categoryId));
         existingCategory.setCategoryId(categoryId);
         existingCategory.setCategoryName(category.getCategoryName());
         return categoryRepo.save(existingCategory);
