@@ -12,7 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @Service
-public class CategoryService implements CategoryServiceInterface{
+public class CategoryService{
     private final CategoryRepo categoryRepo;
 
     @Autowired
@@ -20,12 +20,10 @@ public class CategoryService implements CategoryServiceInterface{
         this.categoryRepo = categoryRepo;
     }
 
-    @Override
     public List<Category> getAllCategories() {
         return categoryRepo.findAll();
     }
 
-    @Override
     public Category createCategory(Category category) {
         Category existingCategory = categoryRepo.findByCategoryName(category.getCategoryName());
         if (existingCategory != null) {
@@ -34,14 +32,12 @@ public class CategoryService implements CategoryServiceInterface{
         return categoryRepo.save(category);
     }
 
-    @Override
     public String deleteCategory(Long categoryId) {
         Category category = categoryRepo.findById(categoryId).orElseThrow(()-> new ResourceNotFoundException("Category","id",categoryId));
         categoryRepo.deleteById(category.getCategoryId());
         return "Category deleted successfully!";
     }
 
-    @Override
     public Category updateCategory(Category category,  Long categoryId) {
         Category existingCategory = categoryRepo.findById(categoryId).orElseThrow(()-> new ResourceNotFoundException("Category","id",categoryId));
         existingCategory.setCategoryId(categoryId);
