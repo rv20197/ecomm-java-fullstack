@@ -1,5 +1,6 @@
 package com.vatsalrajgor.eCommerce.service.Category;
 
+import com.vatsalrajgor.eCommerce.exceptions.APIException;
 import com.vatsalrajgor.eCommerce.exceptions.ResourceNotFoundException;
 import com.vatsalrajgor.eCommerce.model.Category;
 import com.vatsalrajgor.eCommerce.repository.CategoryRepo;
@@ -26,6 +27,10 @@ public class CategoryService implements CategoryServiceInterface{
 
     @Override
     public Category createCategory(Category category) {
+        Category existingCategory = categoryRepo.findByCategoryName(category.getCategoryName());
+        if (existingCategory != null) {
+            throw new APIException(String.format("Category with name %s already exists", category.getCategoryName()));
+        }
         return categoryRepo.save(category);
     }
 
