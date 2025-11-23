@@ -44,10 +44,10 @@ public class CategoryService{
         return categoryMapper.toDTO(result);
     }
 
-    public String deleteCategory(Long categoryId) {
+    public CategoryDTO deleteCategory(Long categoryId) {
         Category category = categoryRepo.findById(categoryId).orElseThrow(()-> new ResourceNotFoundException("Category","id",categoryId));
         categoryRepo.deleteById(category.getCategoryId());
-        return "Category deleted successfully!";
+        return categoryMapper.toDTO(category);
     }
 
     public CategoryDTO updateCategory(CategoryDTO category,  Long categoryId) {
