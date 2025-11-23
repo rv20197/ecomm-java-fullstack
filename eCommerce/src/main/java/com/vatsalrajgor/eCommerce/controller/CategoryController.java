@@ -6,18 +6,20 @@ import com.vatsalrajgor.eCommerce.model.Category;
 import com.vatsalrajgor.eCommerce.service.Category.CategoryService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@AllArgsConstructor
 @RequestMapping("/api")
 public class CategoryController {
-
     private final CategoryService categoryService;
+
+    @Autowired
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
     @GetMapping("/public/categories")
     public ResponseEntity<CategoryResponse> getAllCategories(){
