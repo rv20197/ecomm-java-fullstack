@@ -8,6 +8,9 @@ import com.vatsalrajgor.eCommerce.DTO.Category.CategoryResponse;
 import com.vatsalrajgor.eCommerce.repository.CategoryRepo;
 import com.vatsalrajgor.eCommerce.mapper.CategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,8 +26,10 @@ public class CategoryService{
         this.categoryMapper = categoryMapper;
     }
 
-    public CategoryResponse getAllCategories() {
-        List<Category> categories = categoryRepo.findAll();
+    public CategoryResponse getAllCategories(Integer pageNumber, Integer pageSize) {
+        Pageable pageDetails = PageRequest.of(pageNumber-1,pageSize);
+        Page<Category> categoryPage = categoryRepo.findAll(pageDetails);
+        List<Category> categories = categoryPage.getContent();
         if (categories.isEmpty()) {
             throw new APIException("No categories found!");
         }
