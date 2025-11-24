@@ -4,6 +4,7 @@ import com.vatsalrajgor.eCommerce.DTO.Category.CategoryDTO;
 import com.vatsalrajgor.eCommerce.DTO.Category.CategoryResponse;
 import com.vatsalrajgor.eCommerce.model.Category;
 import com.vatsalrajgor.eCommerce.service.Category.CategoryService;
+import com.vatsalrajgor.eCommerce.config.PaginationProperties;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 public class CategoryController {
     private final CategoryService categoryService;
+    private final PaginationProperties paginationProperties;
 
     @Autowired
-    public CategoryController(CategoryService categoryService) {
+    public CategoryController(CategoryService categoryService, PaginationProperties paginationProperties) {
         this.categoryService = categoryService;
+        this.paginationProperties = paginationProperties;
     }
 
     @GetMapping("/public/categories")
-    public ResponseEntity<CategoryResponse> getAllCategories(@RequestParam(name = "pageNumber", defaultValue = "1") Integer pageNumber, @RequestParam(name = "pageSize", defaultValue = "3") Integer pageSize){
-        return new ResponseEntity<>(categoryService.getAllCategories(pageNumber,pageSize), HttpStatus.OK);
+    public ResponseEntity<CategoryResponse> getAllCategories(@RequestParam(name = "pageNumber", required = false) Integer pageNumber, @RequestParam(name = "pageSize", required = false) Integer pageSize){
+        int pgNum = pageNumber != null ? pageNumber : paginationProperties.getPageNumber();
+        int pgSize = pageSize != null ? pageSize : paginationProperties.getPageSize();
+        return new ResponseEntity<>(categoryService.getAllCategories(pgNum, pgSize), HttpStatus.OK);
     }
 
     @PostMapping("/public/categories")

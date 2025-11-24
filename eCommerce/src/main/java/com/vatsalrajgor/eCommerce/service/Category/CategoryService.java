@@ -27,7 +27,7 @@ public class CategoryService{
     }
 
     public CategoryResponse getAllCategories(Integer pageNumber, Integer pageSize) {
-        Pageable pageDetails = PageRequest.of(pageNumber-1,pageSize);
+        Pageable pageDetails = PageRequest.of(pageNumber-1, pageSize);
         Page<Category> categoryPage = categoryRepo.findAll(pageDetails);
         List<Category> categories = categoryPage.getContent();
         if (categories.isEmpty()) {
@@ -36,7 +36,7 @@ public class CategoryService{
         List<CategoryDTO> categoryDTOs = categories.stream().map(categoryMapper::toDTO).toList();
         CategoryResponse categoryResponse = new CategoryResponse();
         categoryResponse.setContent(categoryDTOs);
-        categoryResponse.setPageNumber(categoryPage.getNumber());
+        categoryResponse.setPageNumber(categoryPage.getNumber()+1);
         categoryResponse.setPageSize(categoryPage.getSize());
         categoryResponse.setTotalElements(categoryPage.getTotalElements());
         categoryResponse.setTotalPages(categoryPage.getTotalPages());
