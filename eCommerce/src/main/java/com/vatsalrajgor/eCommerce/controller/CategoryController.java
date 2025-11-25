@@ -25,10 +25,15 @@ public class CategoryController {
     }
 
     @GetMapping("/public/categories")
-    public ResponseEntity<CategoryResponse> getAllCategories(@RequestParam(name = "pageNumber", required = false) Integer pageNumber, @RequestParam(name = "pageSize", required = false) Integer pageSize){
+    public ResponseEntity<CategoryResponse> getAllCategories(@RequestParam(name = "pageNumber", required = false) Integer pageNumber,
+                                                             @RequestParam(name = "pageSize", required = false) Integer pageSize,
+                                                             @RequestParam(name="sortBy") String sortBy,
+                                                             @RequestParam(name = "sortOrder") String sortOrder){
         int pgNum = pageNumber != null ? pageNumber : paginationProperties.getPageNumber();
         int pgSize = pageSize != null ? pageSize : paginationProperties.getPageSize();
-        return new ResponseEntity<>(categoryService.getAllCategories(pgNum, pgSize), HttpStatus.OK);
+        String sortByParam = sortBy != null ? sortBy : paginationProperties.getSortBy();
+        String sortOrderParam = sortOrder != null ? sortOrder : paginationProperties.getSortOrder();
+        return new ResponseEntity<>(categoryService.getAllCategories(pgNum, pgSize,sortByParam,sortOrderParam), HttpStatus.OK);
     }
 
     @PostMapping("/public/categories")

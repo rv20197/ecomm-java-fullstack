@@ -26,7 +26,7 @@ public class CategoryService{
         this.categoryMapper = categoryMapper;
     }
 
-    public CategoryResponse getAllCategories(Integer pageNumber, Integer pageSize) {
+    public CategoryResponse getAllCategories(Integer pageNumber, Integer pageSize, String sortBy, String sortOrder) {
         Pageable pageDetails = PageRequest.of(pageNumber-1, pageSize);
         Page<Category> categoryPage = categoryRepo.findAll(pageDetails);
         List<Category> categories = categoryPage.getContent();

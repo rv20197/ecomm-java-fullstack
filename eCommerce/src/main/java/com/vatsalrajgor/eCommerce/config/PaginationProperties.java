@@ -12,4 +12,10 @@ public class PaginationProperties {
 
     @Value("${eCommerce.pageSize}")
     private int pageSize;
+
+    @Value("${eCommerce.sortBy}")
+    private String sortBy;
+
+    @Value("${eCommerce.sortOrder}")
+    private String sortOrder;
 }
