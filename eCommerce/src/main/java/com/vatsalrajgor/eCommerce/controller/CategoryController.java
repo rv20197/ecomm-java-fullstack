@@ -27,8 +27,8 @@ public class CategoryController {
     @GetMapping("/public/categories")
     public ResponseEntity<CategoryResponse> getAllCategories(@RequestParam(name = "pageNumber", required = false) Integer pageNumber,
                                                              @RequestParam(name = "pageSize", required = false) Integer pageSize,
-                                                             @RequestParam(name="sortBy") String sortBy,
-                                                             @RequestParam(name = "sortOrder") String sortOrder){
+                                                             @RequestParam(name="sortBy", required = false) String sortBy,
+                                                             @RequestParam(name = "sortOrder", required = false) String sortOrder){
         int pgNum = pageNumber != null ? pageNumber : paginationProperties.getPageNumber();
         int pgSize = pageSize != null ? pageSize : paginationProperties.getPageSize();
         String sortByParam = sortBy != null ? sortBy : paginationProperties.getSortBy();
