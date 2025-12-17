@@ -2,11 +2,9 @@ package com.vatsalrajgor.eCommerce.controller;
 
 import com.vatsalrajgor.eCommerce.DTO.Category.CategoryDTO;
 import com.vatsalrajgor.eCommerce.DTO.Category.CategoryResponse;
-import com.vatsalrajgor.eCommerce.model.Category;
-import com.vatsalrajgor.eCommerce.service.Category.CategoryService;
+import com.vatsalrajgor.eCommerce.service.CategoryService;
 import com.vatsalrajgor.eCommerce.config.PaginationProperties;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
