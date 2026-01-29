@@ -1,10 +1,16 @@
 package com.vatsalrajgor.eCommerce.repository;
 
-import com.vatsalrajgor.eCommerce.model.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.vatsalrajgor.eCommerce.model.Category;
+import com.vatsalrajgor.eCommerce.model.Product;
 
 @Repository
 public interface ProductRepo extends JpaRepository<Product, Long> {
     Product findByProductName(String productName);
+
+    Page<Product> findByCategoryOrderByPriceAsc(Category category, Pageable pageDetails);
 }
