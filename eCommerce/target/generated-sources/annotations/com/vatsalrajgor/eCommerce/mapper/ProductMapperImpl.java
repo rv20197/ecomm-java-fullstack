@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-12-17T17:54:23+0530",
-    comments = "version: 1.6.3, compiler: javac, environment: Java 25.0.1 (Oracle Corporation)"
+    date = "2026-01-29T07:21:46+0530",
+    comments = "version: 1.6.3, compiler: Eclipse JDT (IDE) 3.45.0.v20260101-2150, environment: Java 21.0.9 (Eclipse Adoptium)"
 )
 @Component
 public class ProductMapperImpl implements ProductMapper {
@@ -21,12 +21,12 @@ public class ProductMapperImpl implements ProductMapper {
 
         ProductDTO productDTO = new ProductDTO();
 
+        productDTO.setDiscount( product.getDiscount() );
+        productDTO.setImage( product.getImage() );
+        productDTO.setPrice( product.getPrice() );
         productDTO.setProductId( product.getProductId() );
         productDTO.setProductName( product.getProductName() );
-        productDTO.setImage( product.getImage() );
         productDTO.setQuantity( product.getQuantity() );
-        productDTO.setPrice( product.getPrice() );
-        productDTO.setDiscount( product.getDiscount() );
         productDTO.setSpecialPrice( product.getSpecialPrice() );
 
         return productDTO;
@@ -40,12 +40,12 @@ public class ProductMapperImpl implements ProductMapper {
 
         Product product = new Product();
 
+        product.setDiscount( productDTO.getDiscount() );
+        product.setImage( productDTO.getImage() );
+        product.setPrice( productDTO.getPrice() );
         product.setProductId( productDTO.getProductId() );
         product.setProductName( productDTO.getProductName() );
-        product.setImage( productDTO.getImage() );
         product.setQuantity( productDTO.getQuantity() );
-        product.setPrice( productDTO.getPrice() );
-        product.setDiscount( productDTO.getDiscount() );
         product.setSpecialPrice( productDTO.getSpecialPrice() );
 
         return product;
